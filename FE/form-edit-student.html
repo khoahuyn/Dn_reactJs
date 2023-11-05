@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>THÊM MỚI SINH VIÊN</title>
+    <title>CHỈNH SỬA SINH VIÊN</title>
     <style>
 
         body {
@@ -80,14 +80,14 @@
 <div class="container">
 
     <div class="header">
-        <h2 class="title">THÊM MỚI SINH VIÊN</h2>
+        <h2 class="title">CHỈNH SỬA SINH VIÊN</h2>
     </div>
 
     <form>
         <div class="row">
             <div class="col-md-3 mr-2">
                 <div class="avatar-container">
-                    <img src="default-avatar.png" alt="Avatar" class="avatar" id="avatar-image">
+                    <img src="sinhvien.png" alt="Avatar" class="avatar" id="avatar-image">
                     <div class="form-group mt-2" style="text-align: center">
                         <label >Chọn ảnh đại diện</label>
                         <input type="file" class="form-control form-control-file inputfile btn btn-primary" id="avatar" onchange="displayImage(this)" ><br>
@@ -98,11 +98,11 @@
             <div class="col-md-4 mr-5">
                 <div class="form-group">
                     <label for="name">Tên sinh viên  (<span class="text-danger">*</span>):</label>
-                    <input type="text" class="form-control" id="name" placeholder="Nhập tên sinh viên">
+                    <input type="text" class="form-control" id="name" value="Nguyễn Nhật Huy">
                 </div>
                 <div class="form-group">
                     <label for="dob">Ngày Sinh (<span class="text-danger">*</span>):</label>
-                    <input type="date" class="form-control" id="dob">
+                    <input type="date" class="form-control" id="dob" value="2004-08-02">
                 </div>
                 <div class="form-group">
                     <label for="class">Lớp (<span class="text-danger">*</span>):</label>
@@ -116,17 +116,17 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email (<span class="text-danger">*</span>):</label>
-                    <input type="text" class="form-control" id="email" placeholder="Nhập email">
+                    <input type="text" class="form-control" id="email" value="ptHuy@gmail.com">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="phone">Số Điện Thoại (<span class="text-danger">*</span>):</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại">
+                    <input type="text" class="form-control" id="phone" value="0928394743">
                 </div>
                 <div class="form-group">
                     <label for="address">Địa Chỉ (<span class="text-danger">*</span>):</label>
-                    <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ">
+                    <input type="text" class="form-control" id="address" value="08 Hòa Hoa Thám, Hòa Khánh Bắc">
                 </div>
                 <div class="form-group">
                     <label for="gender">Giới Tính (<span class="text-danger">*</span>):</label>
@@ -134,6 +134,10 @@
                         <option value="nam">Nam</option>
                         <option value="nu">Nữ</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="id">Mã sinh viên(<span class="text-danger">*</span>):</label>
+                    <input type="text" class="form-control" id="id" value="SV-001">
                 </div>
                 <div class="mt-3 save-exit-buttons">
                     <button class="btn btn-outline-success">Lưu</button>
