@@ -74,6 +74,9 @@
             background-color: #007bff;
             color: white;
         }
+        textarea.form-control{
+            height: 125px;
+        }
     </style>
 </head>
 <body>
@@ -116,7 +119,10 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email (<span class="text-danger">*</span>):</label>
-                    <input type="text" class="form-control" id="email" value="ptHuy@gmail.com">
+                    <input type="text" class="form-control is-invalid" id="email" value="ptHuy@gmail.com">
+                    <div id="emailFeedback" class="invalid-feedback">
+                        Please provide a valid email.
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -126,7 +132,7 @@
                 </div>
                 <div class="form-group">
                     <label for="address">Địa Chỉ (<span class="text-danger">*</span>):</label>
-                    <input type="text" class="form-control" id="address" value="08 Hòa Hoa Thám, Hòa Khánh Bắc">
+                    <textarea  class="form-control" id="address">08 Hòa Hoa Thám, Hòa Khánh Bắc</textarea>
                 </div>
                 <div class="form-group">
                     <label for="gender">Giới Tính (<span class="text-danger">*</span>):</label>
@@ -135,17 +141,12 @@
                         <option value="nu">Nữ</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="id">Mã sinh viên(<span class="text-danger">*</span>):</label>
-                    <input type="text" class="form-control" id="id" value="SV-001">
-                </div>
                 <div class="mt-3 save-exit-buttons">
                     <button class="btn btn-outline-success">Lưu</button>
                     <button class="btn btn-outline-secondary ml-2">Thoát</button>
                 </div>
             </div>
         </div>
-
     </form>
 </div>
 
