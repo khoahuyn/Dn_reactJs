@@ -1,7 +1,9 @@
 package com.example.be.dto;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public interface IStudentEditDTO {
-    Integer getId();
+    Integer getStudentId();
     String getName();
     String getDateOfBirth();
     String getAddress();
@@ -9,5 +11,8 @@ public interface IStudentEditDTO {
     String getEmail();
     String getImage();
     Integer getGrade();
+
+    @Value("#{target.gender == 1}")
     Boolean getGender();
 }
+

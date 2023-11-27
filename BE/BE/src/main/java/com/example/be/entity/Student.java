@@ -10,8 +10,8 @@ import javax.persistence.*;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Integer id;
+    @Column(name = "student_id")
+    private Integer studentId;
 
     private String name;
 
@@ -23,46 +23,47 @@ public class Student {
 
     private String email;
 
-    private String image;
+    private String avatar;
 
     private Boolean gender;
 
-    private Boolean delete_flag;
+    @Column(name = "delete_flag")
+    private Boolean deleteFlag;
 
 
     @ManyToOne
-    @JoinColumn(name = "grade_id", referencedColumnName = "id")
+    @JoinColumn(name = "grade_id", referencedColumnName = "grade_id")
     private Grade grade;
 
     @JsonBackReference(value = "account")
     @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 
 
     public Student() {
     }
 
-    public Student(Integer id, String name, String dateOfBirth, String address, String phone, String email, String image, Boolean gender, Boolean delete_flag, Grade grade, Account account) {
-        this.id = id;
+    public Student(Integer studentId, String name, String dateOfBirth, String address, String phone, String email, String avatar, Boolean gender, Boolean deleteFlag, Grade grade, Account account) {
+        this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.image = image;
+        this.avatar = avatar;
         this.gender = gender;
-        this.delete_flag = delete_flag;
+        this.deleteFlag = deleteFlag;
         this.grade = grade;
         this.account = account;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
     public String getName() {
@@ -105,12 +106,12 @@ public class Student {
         this.email = email;
     }
 
-    public String getImage() {
-        return image;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public Boolean getGender() {
@@ -121,12 +122,12 @@ public class Student {
         this.gender = gender;
     }
 
-    public Boolean getDelete_flag() {
-        return delete_flag;
+    public Boolean getDeleteFlag() {
+        return deleteFlag;
     }
 
-    public void setDelete_flag(Boolean delete_flag) {
-        this.delete_flag = delete_flag;
+    public void setDeleteFlag(Boolean deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 
     public Grade getGrade() {

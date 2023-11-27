@@ -1,4 +1,4 @@
 package com.example.be.repository;
 
-public interface RoleRepository {
+public interface IRoleRepository {
 }

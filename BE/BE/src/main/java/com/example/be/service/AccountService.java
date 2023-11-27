@@ -9,7 +9,7 @@ public interface AccountService {
 
     Account getAccountById(Integer idAccount);
 
-    Account getAccountByIdStudent(Integer id);
+    Account getAccountByIdStudent(Integer studentId);
 
     void changePassword(Account account);
 

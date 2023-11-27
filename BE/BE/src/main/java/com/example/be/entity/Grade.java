@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Grade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "grade_id")
+    private Integer gradeId;
 
     private String name;
 
@@ -15,17 +16,17 @@ public class Grade {
     public Grade() {
     }
 
-    public Grade(Integer id, String name) {
-        this.id = id;
+    public Grade(Integer gradeId, String name) {
+        this.gradeId = gradeId;
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getGradeId() {
+        return gradeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setGradeId(Integer gradeId) {
+        this.gradeId = gradeId;
     }
 
     public String getName() {

@@ -2,7 +2,7 @@ package com.example.be.service.impl;
 
 
 import com.example.be.entity.Account;
-import com.example.be.repository.AccountRepository;
+import com.example.be.repository.IAccountRepository;
 import com.example.be.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private IAccountRepository accountRepository;
 
     @Override
     public Account findByUsername(String username) {
@@ -19,13 +19,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account getAccountById(Integer idAccount) {
-        return accountRepository.findById(idAccount).orElse(null);
+    public Account getAccountById(Integer accountId) {
+        return accountRepository.findById(accountId).orElse(null);
     }
 
     @Override
-    public Account getAccountByIdStudent(Integer id) {
-        return accountRepository.findByStudent_Id(id);
+    public Account getAccountByIdStudent(Integer studentId) {
+        return accountRepository.findAccountByStudent(studentId);
     }
 
 

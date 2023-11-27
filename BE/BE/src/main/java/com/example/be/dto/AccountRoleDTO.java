@@ -1,19 +1,19 @@
 package com.example.be.dto;
 
 public class AccountRoleDTO {
-    private Integer id;
+    private Integer accountRoleId;
     private Integer accountId;
     private Integer roleId;
 
     public AccountRoleDTO() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getAccountRoleId() {
+        return accountRoleId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAccountRoleId(Integer accountRoleId) {
+        this.accountRoleId = accountRoleId;
     }
 
     public Integer getAccountId() {

@@ -8,7 +8,7 @@ import java.util.List;
 public interface GradeService {
 
     /**
-     * TinVT
+     * KhoaHND
      * Find All Grade
      */
     List<Grade> getAllGrade();
