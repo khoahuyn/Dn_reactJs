@@ -1,13 +1,15 @@
 package com.example.be.entity;
 
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="student")
-public class Student {
+public class Student{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
@@ -145,4 +147,5 @@ public class Student {
     public void setAccount(Account account) {
         this.account = account;
     }
+
 }

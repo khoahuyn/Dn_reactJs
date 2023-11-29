@@ -1,13 +1,13 @@
 package com.example.be.dto;
 
-public class CreateUpdateStudentDTO  {
+public class CreateUpdateStudentDTO{
     private Integer studentId;
     private String name;
     private String dateOfBirth;
     private String address;
     private String phone;
     private String email;
-    private String image;
+    private String avatar;
     private Boolean gender;
     private Integer grade;
     private Integer accountId;
@@ -15,14 +15,14 @@ public class CreateUpdateStudentDTO  {
     public CreateUpdateStudentDTO() {
     }
 
-    public CreateUpdateStudentDTO(Integer studentId, String name, String dateOfBirth, String address, String phone, String email, String image, Boolean gender, Integer grade, Integer accountId) {
+    public CreateUpdateStudentDTO(Integer studentId, String name, String dateOfBirth, String address, String phone, String email, String avatar, Boolean gender, Integer grade, Integer accountId) {
         this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.image = image;
+        this.avatar = avatar;
         this.gender = gender;
         this.grade = grade;
         this.accountId = accountId;
@@ -76,12 +76,12 @@ public class CreateUpdateStudentDTO  {
         this.email = email;
     }
 
-    public String getImage() {
-        return image;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public Boolean getGender() {
@@ -107,4 +107,5 @@ public class CreateUpdateStudentDTO  {
     public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
+
 }

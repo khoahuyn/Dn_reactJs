@@ -5,12 +5,7 @@ import com.example.be.dto.CreateUpdateStudentDTO;
 import com.example.be.dto.IStudentEditDTO;
 
 
-public interface StudentService {
-
-
-
-
-
+public interface IStudentService {
 
     /**
      * KhoaHND

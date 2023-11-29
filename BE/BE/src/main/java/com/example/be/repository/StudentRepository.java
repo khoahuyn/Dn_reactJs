@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface IStudentRepository extends JpaRepository<Student, Integer> {
+public interface StudentRepository extends JpaRepository<Student, Integer> {
 
 
 
@@ -39,13 +39,5 @@ public interface IStudentRepository extends JpaRepository<Student, Integer> {
     @Query(value = "select student.student_id as studentId, student.name as name, student.date_of_birth as dateOfBirth, student.phone as phone," +
             "student.grade_id as grade, student.address as address, student.email as email, student.avatar as avatar, student.gender as gender from student where student.student_id = ?1 and student.delete_flag = 1", nativeQuery = true)
     IStudentEditDTO findStudentByStudentId(Integer studentId);
-
-
-
-
-
-
-
-
 
 }

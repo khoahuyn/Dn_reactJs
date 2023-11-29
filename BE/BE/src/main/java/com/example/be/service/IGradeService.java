@@ -5,7 +5,7 @@ import com.example.be.entity.Grade;
 
 import java.util.List;
 
-public interface GradeService {
+public interface IGradeService {
 
     /**
      * KhoaHND

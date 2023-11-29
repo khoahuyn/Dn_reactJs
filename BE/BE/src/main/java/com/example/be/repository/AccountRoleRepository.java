@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public interface IAccountRoleRepository extends JpaRepository<AccountRole, Integer> {
+public interface AccountRoleRepository extends JpaRepository<AccountRole, Integer> {
     List<AccountRole> findAllByAccount(Account account);
 
     @Modifying
