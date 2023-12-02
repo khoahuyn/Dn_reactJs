@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api")
 public class StudentController {
@@ -40,8 +40,12 @@ public class StudentController {
      */
     @RequestMapping(value = "/edit-student", method = RequestMethod.PUT)
     public ResponseEntity<?> editStudent(@RequestBody CreateUpdateStudentDTO studentDTO){
-        IStudentService.editStudent(studentDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        Map<String,String> errors  = studentValidator.validate(studentDTO);
+        if(errors.isEmpty()){
+            IStudentService.editStudent(studentDTO);
+            return new ResponseEntity<CreateUpdateStudentDTO>(studentDTO,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
     }
 
     /**

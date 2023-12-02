@@ -1,10 +1,41 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import './create-student.css';
-import anh from './image/default-avatar.png';
+import '../Css/create-student.css';
+import anh from '../image/default-avatar.png';
 import * as Yup from "yup";
+import {save} from "../Service/studentService";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import * as gradeService from '../Service/gradeService'
+import axios from "axios";
+const URL = "http://localhost:8080/api/get-all-grade";
+const URL2 = "http://localhost:8080/api/create-student";
+
+
+
 
 export function Create() {
+    const [grades, setGrades] = useState([])
+
+    const [avatar,setAvatar]=useState(null)
+
+
+
+    useEffect(() => {
+        findAll();
+    }, []);
+
+
+
+    const findAll = async () => {
+        try {
+            const result = await gradeService.findAllGrade(URL);
+            setGrades(result);
+        } catch (error) {
+            console.error("Error fetching grades:", error);
+        }
+    }
+
 
     function displayImage(input) {
         if (input.files && input.files[0]) {
@@ -16,7 +47,14 @@ export function Create() {
 
             reader.readAsDataURL(input.files[0]);
         }
+        setAvatar({avatar:avatar})
     }
+
+
+
+
+
+
 
     return (
         <>
@@ -29,15 +67,49 @@ export function Create() {
                         address: '',
                         phone: '',
                         email: '',
-                        avatar: '',
-                        gender: '',
+                        avatar: null,
+                        gender: false,
                         deleteFlag: '',
-                        grade: '',
+                        grade: 3,
                         account: ''
                     }}
-                onSubmit={() => {
 
+                onSubmit={async (values) => {
+                    try {
+                        values.gender = values.gender === 'true' ? 0 : 1;
+                        save(values);
+                        toast('🦄 Add student successfully!!!!');
+                    } catch (error) {
+                        console.error('Error uploading file or saving student:', error);
+                    }
                 }}
+
+                // onSubmit={async (values) => {
+                //     try {
+                //         // const formData = new FormData();
+                //         //
+                //         //
+                //         // if (avatar) {
+                //         //     formData.append('avatar', avatar);
+                //         // }
+                //         //
+                //         // // Send the formData with all fields to the server
+                //         // await axios.post(URL2, formData, {
+                //         //     headers: {
+                //         //         'Content-Type': 'multipart/form-data',
+                //         //     },
+                //         // });
+                //
+                //         values.gender = values.gender === 'true' ? 1 : 0;
+                //         save(values);
+                //
+                //         toast('🦄 Add student successfully!!!!');
+                //     } catch (error) {
+                //         console.error('Error uploading file or saving student:', error);
+                //     }
+                // }}
+
+
 
 
                 validationSchema={Yup.object({
@@ -56,15 +128,13 @@ export function Create() {
                         .matches(/^[0-9]+$/, 'Số điện thoại không hợp lệ'),
                     dateOfBirth: Yup.string()
                         .required("Ngày tháng năm không được để trống")
-                        .matches(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/, "Ngày tháng năm  không hợp lệ"),
+                        .matches(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/, "Ngày tháng năm  không hợp lệ"),
                     address: Yup.string()
                         .required("Địa chỉ không được để trống")
                         .min(5, 'Địa chỉ không được bé hơn 5')
                         .max(50, 'Địa chỉ viên không được lớn hơn 50'),
-                    avatar: Yup.mixed()
-                        // .test("Ảnh quá lớn", (value) => value && value.size < 1024 * 1024)
-                        // .test("File không hợp lệ",
-                        //     (value) => value && ['avatar/png', 'avatar/jpeg', 'avatar/jpg'].includes(value.type))
+                    grade:Yup.string()
+                        .required("Lớp không được để trống")
 
 
                 })}
@@ -76,17 +146,18 @@ export function Create() {
                             <h2 className="title">THÊM MỚI SINH VIÊN</h2>
                         </div>
 
-                        <form>
+
                             <div className="row">
+
                                 <div className="col-md-3 mr-2">
                                     <div className="avatar-container">
-                                        <img src={anh} alt="Avatar" className="avatar"
+                                        <img src={anh} alt="avatar" className="avatar"
                                              id="avatar-image"/>
                                         <div className="form-group mt-2" style={{textAlign: "center"}}>
                                             <label>Chọn ảnh đại diện</label>
-                                            <input type="file" accept=".png, .jpg, .jpeg, .webp"
+                                            <input type="file"
                                                    className="form-control form-control-file inputfile btn btn-primary"
-                                                   id="avatar" onChange={(e) => displayImage(e.target)}/>
+                                                   id="avatar" onChange={(e) => displayImage(e.target)} name="avatar"/>
                                             <br/>
                                             <label htmlFor="avatar">Chọn tệp</label>
                                             <ErrorMessage name="avatar" className="text-danger" component="p"/>
@@ -102,19 +173,22 @@ export function Create() {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="dateOfBirth">Ngày Sinh (<span className="text-danger">*</span>):</label>
-                                        <Field type="date" className="form-control" id="dateOfBirth"
+                                        <Field type="text" className="form-control" id="dateOfBirth"
                                                name="dateOfBirth"/>
                                         <ErrorMessage name="dateOfBirth" className="text-danger" component="p"/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="grade">Lớp (<span className="text-danger">*</span>):</label>
                                         <Field as="select" className="form-control" id="grade" name="grade">
-                                            <option>A0322I1</option>
-                                            <option>A0522I1</option>
-                                            <option>A0722I1</option>
-                                            <option>A0922I1</option>
-                                            <option>A1122I1</option>
+                                            {grades && grades.length > 0 ? (
+                                                grades.map((grade) => (
+                                                    <option key={grade.gradeId} value={grade.gradeId}>{grade.name}</option>
+                                                ))
+                                            ) : (
+                                                <option value="" disabled>Không có lớp nào</option>
+                                            )}
                                         </Field>
+                                        <ErrorMessage name="grade" className="text-danger" component="p"/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="email">Email (<span className="text-danger">*</span>):</label>
@@ -139,17 +213,16 @@ export function Create() {
                                         <label htmlFor="gender">Giới Tính (<span
                                             className="text-danger">*</span>):</label>
                                         <Field as="select" className="form-control" id="gender" name="gender">
-                                            <option>Nam</option>
-                                            <option>Nữ</option>
+                                            <option value="true">Nam</option>
+                                            <option value="false">Nữ</option>
                                         </Field>
                                     </div>
                                     <div className="mt-3 save-exit-buttons">
-                                        <button className="btn btn-outline-success">Lưu</button>
+                                        <button type="submit" className="btn btn-outline-success">Lưu</button>
                                         <button className="btn btn-outline-secondary ml-2">Thoát</button>
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </Form>
             </Formik>
